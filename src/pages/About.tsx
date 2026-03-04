@@ -183,39 +183,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="py-8 pb-16">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="bg-card border border-border/50 rounded-xl p-8"
-          >
-            <h2 className="text-xl font-semibold text-foreground mb-4">
-              Built With
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "React",
-                "TypeScript",
-                "Tailwind CSS",
-                "Recharts",
-                "Framer Motion",
-                "Vite",
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className="px-4 py-2 bg-muted rounded-lg text-sm text-muted-foreground"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="py-8 border-t border-border/50">
         <div className="container mx-auto px-6">

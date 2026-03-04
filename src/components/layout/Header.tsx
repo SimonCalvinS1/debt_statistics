@@ -6,6 +6,7 @@ const navItems = [
   { path: "/analysis", label: "Analysis", icon: BarChart3 },
   { path: "/trends", label: "Trends", icon: TrendingUp },
   { path: "/about", label: "About", icon: Info },
+  { path: "/table", label: "Table", icon: Database },
 ];
 
 export const Header = () => {

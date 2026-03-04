@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { Header } from "@/components/layout/Header";
 import { debtData, DebtDataPoint } from "../data/debtData";
 
 type SortKey = keyof DebtDataPoint;
@@ -35,98 +37,130 @@ export default function Table() {
   };
 
   return (
-    <div className="w-full h-screen overflow-auto bg-gray-50 p-4">
-      <table className="w-full border-collapse border border-gray-400">
-        <thead className="sticky top-0 bg-blue-600 text-white">
-          <tr>
-            <th
-              onClick={() => handleSort("year")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              Year{renderSortIndicator("year")}
-            </th>
-            <th
-              onClick={() => handleSort("privateDebt")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              Private Debt{renderSortIndicator("privateDebt")}
-            </th>
-            <th
-              onClick={() => handleSort("householdDebt")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              Household Debt{renderSortIndicator("householdDebt")}
-            </th>
-            <th
-              onClick={() => handleSort("corporateDebt")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              Corporate Debt{renderSortIndicator("corporateDebt")}
-            </th>
-            <th
-              onClick={() => handleSort("publicSectorDebt")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              Public Sector Debt{renderSortIndicator("publicSectorDebt")}
-            </th>
-            <th
-              onClick={() => handleSort("generalGovernmentDebt")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              General Gov. Debt{renderSortIndicator("generalGovernmentDebt")}
-            </th>
-            <th
-              onClick={() => handleSort("centralGovernmentDebt")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              Central Gov. Debt{renderSortIndicator("centralGovernmentDebt")}
-            </th>
-            <th
-              onClick={() => handleSort("gdpBillions")}
-              className="border border-gray-400 px-4 py-3 text-left font-bold cursor-pointer hover:bg-blue-700"
-            >
-              GDP (Billions){renderSortIndicator("gdpBillions")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedData.map((row, idx) => (
-            <tr
-              key={idx}
-              className={
-                idx % 2 === 0
-                  ? "bg-white text-gray-900"
-                  : "bg-gray-100 text-gray-900"
-              }
-            >
-              <td className="border border-gray-400 px-4 py-2 font-semibold">
-                {row.year}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.privateDebt?.toFixed(2) || "-"}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.householdDebt?.toFixed(2) || "-"}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.corporateDebt?.toFixed(2) || "-"}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.publicSectorDebt?.toFixed(2) || "-"}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.generalGovernmentDebt?.toFixed(2) || "-"}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.centralGovernmentDebt?.toFixed(2) || "-"}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {row.gdpBillions?.toFixed(2) || "-"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="min-h-screen bg-background">
+      <Header />
+
+      <section className="pt-24 pb-12">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              Debt <span className="text-gradient">Database</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Explore detailed debt statistics with interactive sorting and
+              filtering
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="pb-12">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-card border border-border/50 rounded-xl overflow-hidden"
+          >
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-secondary/50 border-b border-border/50 sticky top-0">
+                  <tr>
+                    <th
+                      onClick={() => handleSort("year")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      Year{renderSortIndicator("year")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("privateDebt")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      Private Debt{renderSortIndicator("privateDebt")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("householdDebt")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      Household Debt{renderSortIndicator("householdDebt")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("corporateDebt")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      Corporate Debt{renderSortIndicator("corporateDebt")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("publicSectorDebt")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      Public Sector Debt
+                      {renderSortIndicator("publicSectorDebt")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("generalGovernmentDebt")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      General Gov. Debt
+                      {renderSortIndicator("generalGovernmentDebt")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("centralGovernmentDebt")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      Central Gov. Debt
+                      {renderSortIndicator("centralGovernmentDebt")}
+                    </th>
+                    <th
+                      onClick={() => handleSort("gdpBillions")}
+                      className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-secondary/80 transition-colors"
+                    >
+                      GDP (Billions){renderSortIndicator("gdpBillions")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/30">
+                  {sortedData.map((row, idx) => (
+                    <tr
+                      key={idx}
+                      className="hover:bg-secondary/30 transition-colors"
+                    >
+                      <td className="px-6 py-4 text-sm font-semibold text-foreground">
+                        {row.year}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.privateDebt?.toFixed(2) || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.householdDebt?.toFixed(2) || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.corporateDebt?.toFixed(2) || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.publicSectorDebt?.toFixed(2) || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.generalGovernmentDebt?.toFixed(2) || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.centralGovernmentDebt?.toFixed(2) || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {row.gdpBillions?.toFixed(2) || "-"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
